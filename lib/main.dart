@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'carousel.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: ListTile(
                 title: Text('Home Page'),
-                leading: Icon(Icons.home),
+                leading: Icon(Icons.home, color: Colors.red,),
               ),
             ),
             InkWell(
@@ -68,7 +70,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: ListTile(
                 title: Text('My Account'),
-                leading: Icon(Icons.person),
+                leading: Icon(Icons.person, color: Colors.red,),
               ),
             ),
             InkWell(
@@ -77,7 +79,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: ListTile(
                 title: Text('My Orders'),
-                leading: Icon(Icons.shopping_basket),
+                leading: Icon(Icons.shopping_basket, color: Colors.red,),
               ),
             ),
             InkWell(
@@ -86,7 +88,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: ListTile(
                 title: Text('Categories'),
-                leading: Icon(Icons.dashboard),
+                leading: Icon(Icons.dashboard, color: Colors.red,),
               ),
             ),
             InkWell(
@@ -95,7 +97,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: ListTile(
                 title: Text('Favorites'),
-                leading: Icon(Icons.favorite),
+                leading: Icon(Icons.favorite, color: Colors.red,),
               ),
             ),
             Divider(
@@ -108,7 +110,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: ListTile(
                 title: Text('Settings'),
-                leading: Icon(Icons.settings),
+                leading: Icon(Icons.settings, color: Colors.blue,),
               ),
             ),
             InkWell(
@@ -117,11 +119,20 @@ class _HomePageState extends State<HomePage> {
               },
               child: ListTile(
                 title: Text('About'),
-                leading: Icon(Icons.help),
+                leading: Icon(Icons.help, color: Colors.blue,),
               ),
             ),
           ],
         ),
+      ),
+      body: ListView(
+        children: [
+          Carousel(),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text('Categories'),
+          ),
+        ],
       ),
     );
   }
