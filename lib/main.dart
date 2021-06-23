@@ -1,7 +1,8 @@
-import 'package:e_market/components/horizontal_listview.dart';
 import 'package:flutter/material.dart';
+import 'package:e_market/components/horizontal_listview.dart';
 import 'components/carousel.dart';
 import 'components/drawer.dart';
+import 'components/products.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
@@ -41,17 +42,27 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawer: Drawer(
-        child: DrawerClass(),
+        child: DrawerView(),
       ),
       body: ListView(
         children: [
-          CarouselClass(),
+          CarouselView(),
           Padding(
             padding: EdgeInsets.all(20.0),
             child: Text('Categories'),
           ),
 
           HorizontalList(),
+
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text('Recent Products'),
+          ),
+
+          Container(
+            height: 320.0,
+            child: Products(),
+          ),
         ],
       ),
     );
