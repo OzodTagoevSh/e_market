@@ -1,5 +1,8 @@
+import 'package:e_market/pages/product_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+/************************ PRODUCTS CLASS ***************************/
 
 class Products extends StatefulWidget {
   const Products({Key? key}) : super(key: key);
@@ -9,7 +12,6 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
-
   var productList = [
     {
       'name': 'Samsung A32',
@@ -45,18 +47,16 @@ class _ProductsState extends State<Products> {
 }
 
 class SingleProduct extends StatelessWidget {
-
   final productName;
   final productPicture;
   final oldPrice;
   final price;
 
-  SingleProduct({
-    required this.productName,
-    required this.productPicture,
-    required this.oldPrice,
-    required this.price
-  });
+  SingleProduct(
+      {required this.productName,
+      required this.productPicture,
+      required this.oldPrice,
+      required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +65,13 @@ class SingleProduct extends StatelessWidget {
         tag: productName,
         child: Material(
           child: InkWell(
-            onTap: () {
-
-            },
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ProductDetails(
+                  productDetailsName: productName,
+                  productDetailsPicture: productPicture,
+                  productDetailsOldPrice: oldPrice,
+                  productDetailsPrice: price,
+                ))),
             child: GridTile(
               footer: Container(
                 color: Colors.white70,
@@ -79,7 +83,7 @@ class SingleProduct extends StatelessWidget {
                   title: Text(
                     '\$$price',
                     style: TextStyle(
-                      color: Colors.red,
+                      color: Colors.deepOrange,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -93,7 +97,10 @@ class SingleProduct extends StatelessWidget {
                   ),
                 ),
               ),
-              child: Image.asset(productPicture, fit: BoxFit.cover,),
+              child: Image.asset(
+                productPicture,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -101,4 +108,3 @@ class SingleProduct extends StatelessWidget {
     );
   }
 }
-

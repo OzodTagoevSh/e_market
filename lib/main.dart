@@ -46,23 +46,31 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(
         children: [
+          // CAROUSEL PART
           CarouselView(),
+
+          // PADDING WIDGET
           Padding(
             padding: EdgeInsets.all(20.0),
             child: Text('Categories'),
           ),
 
+          // HORIZONTAL LIST FOR CATEGORIES
           HorizontalList(),
 
+          // PADDING WIDGET
           Padding(
             padding: EdgeInsets.all(20.0),
             child: Text('Recent Products'),
           ),
 
+          // GRID VIEW FOR RECENT PRODUCTS
           Container(
             height: 320.0,
             child: Products(),
           ),
+
+
         ],
       ),
     );
