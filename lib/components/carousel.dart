@@ -11,56 +11,11 @@ class CarouselView extends StatelessWidget {
       color: Colors.grey[100],
       child: CarouselSlider(
         items: [
-          Container(
-            margin: EdgeInsets.all(5.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                image: AssetImage('images/phones.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(5.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                image: AssetImage('images/perfume.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(5.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                image: AssetImage('images/clothes.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(5.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                image: AssetImage('images/laptop.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(5.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                image: AssetImage('images/fridges.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          ContainerForCarousel(imageLocation: 'phones.jpg',),
+          ContainerForCarousel(imageLocation: 'perfume.jpg',),
+          ContainerForCarousel(imageLocation: 'clothes.jpg',),
+          ContainerForCarousel(imageLocation: 'laptop.jpg',),
+          ContainerForCarousel(imageLocation: 'fridges.jpg',),
         ],
         options: CarouselOptions(
           initialPage: 0,
@@ -79,3 +34,24 @@ class CarouselView extends StatelessWidget {
     );
   }
 }
+
+class ContainerForCarousel extends StatelessWidget {
+
+  final imageLocation;
+  ContainerForCarousel({this.imageLocation});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        image: DecorationImage(
+          image: AssetImage('images/$imageLocation'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+

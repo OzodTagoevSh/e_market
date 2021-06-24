@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Products extends StatefulWidget {
@@ -11,7 +12,7 @@ class _ProductsState extends State<Products> {
 
   var productList = [
     {
-      'name': 'Samsung Galaxy A32',
+      'name': 'Samsung A32',
       'picture': 'images/products/galaxy.jpeg',
       'oldPrice': 250,
       'price': 230,
@@ -26,7 +27,20 @@ class _ProductsState extends State<Products> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return GridView.builder(
+      itemCount: productList.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+      itemBuilder: (BuildContext context, int index) {
+        return SingleProduct(
+          productName: productList[index]['name'],
+          productPicture: productList[index]['picture'],
+          oldPrice: productList[index]['oldPrice'],
+          price: productList[index]['price'],
+        );
+      },
+    );
   }
 }
 
@@ -46,7 +60,45 @@ class SingleProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Card(
+      child: Hero(
+        tag: productName,
+        child: Material(
+          child: InkWell(
+            onTap: () {
+
+            },
+            child: GridTile(
+              footer: Container(
+                color: Colors.white70,
+                child: ListTile(
+                  leading: Text(
+                    productName,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  title: Text(
+                    '\$$price',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '\$$oldPrice',
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w800,
+                      decoration: TextDecoration.lineThrough,
+                    ),
+                  ),
+                ),
+              ),
+              child: Image.asset(productPicture, fit: BoxFit.cover,),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
