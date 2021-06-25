@@ -1,17 +1,14 @@
 import 'package:e_market/pages/product_details.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/************************ PRODUCTS CLASS ***************************/
-
-class Products extends StatefulWidget {
-  const Products({Key? key}) : super(key: key);
+class SimilarProducts extends StatefulWidget {
+  const SimilarProducts({Key? key}) : super(key: key);
 
   @override
-  _ProductsState createState() => _ProductsState();
+  _SimilarProductsState createState() => _SimilarProductsState();
 }
 
-class _ProductsState extends State<Products> {
+class _SimilarProductsState extends State<SimilarProducts> {
   var productList = [
     {
       'name': 'Samsung A32',
@@ -24,18 +21,6 @@ class _ProductsState extends State<Products> {
       'picture': 'images/products/iphone.jpeg',
       'oldPrice': 1200,
       'price': 1100,
-    },
-    {
-      'name': 'Dell',
-      'picture': 'images/products/laptop1.jpeg',
-      'oldPrice': 750,
-      'price': 680,
-    },
-    {
-      'name': 'Lenovo',
-      'picture': 'images/products/laptop2.jpeg',
-      'oldPrice': 600,
-      'price': 590,
     },
     {
       'name': 'Redmi Note 9',
@@ -61,12 +46,6 @@ class _ProductsState extends State<Products> {
       'oldPrice': 650,
       'price': 610,
     },
-    {
-      'name': 'Wash Machine',
-      'picture': 'images/products/washing_machine.jpeg',
-      'oldPrice': 810,
-      'price': 770,
-    }
   ];
 
   @override
@@ -77,7 +56,7 @@ class _ProductsState extends State<Products> {
         crossAxisCount: 2,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return SingleProduct(
+        return SimilarSingleProduct(
           productName: productList[index]['name'],
           productPicture: productList[index]['picture'],
           oldPrice: productList[index]['oldPrice'],
@@ -88,17 +67,18 @@ class _ProductsState extends State<Products> {
   }
 }
 
-class SingleProduct extends StatelessWidget {
+
+class SimilarSingleProduct extends StatelessWidget {
   final productName;
   final productPicture;
   final oldPrice;
   final price;
 
-  SingleProduct(
+  SimilarSingleProduct(
       {required this.productName,
-      required this.productPicture,
-      required this.oldPrice,
-      required this.price});
+        required this.productPicture,
+        required this.oldPrice,
+        required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -109,11 +89,11 @@ class SingleProduct extends StatelessWidget {
           child: InkWell(
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ProductDetails(
-                      productDetailsName: productName,
-                      productDetailsPicture: productPicture,
-                      productDetailsOldPrice: oldPrice,
-                      productDetailsPrice: price,
-                    ))),
+                  productDetailsName: productName,
+                  productDetailsPicture: productPicture,
+                  productDetailsOldPrice: oldPrice,
+                  productDetailsPrice: price,
+                ))),
             child: GridTile(
               footer: Container(
                 color: Colors.white,
@@ -152,3 +132,5 @@ class SingleProduct extends StatelessWidget {
     );
   }
 }
+
+

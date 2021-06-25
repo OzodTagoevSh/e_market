@@ -1,4 +1,6 @@
+import 'package:e_market/main.dart';
 import 'package:flutter/material.dart';
+import 'package:e_market/components/similar_products.dart';
 
 /************************* PRODUCT DETAILS CLASS **************************/
 
@@ -25,17 +27,17 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
-        title: Text('E-Market'),
+        title: InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+          },
+          child: Text('E-Market')),
         centerTitle: true,
         elevation: 0.0,
         actions: [
           IconButton(
             onPressed: () {},
             icon: Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.shopping_cart),
           ),
         ],
       ),
@@ -88,7 +90,27 @@ class _ProductDetailsState extends State<ProductDetails> {
             children: [
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Memory'),
+                            content: Text('Choose the memory'),
+                            actions: [
+                              MaterialButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(context);
+                                },
+                                child: Text(
+                                  'Close',
+                                  style: TextStyle(color: Colors.blue),
+                                ),
+                              ),
+                            ],
+                          );
+                        });
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   elevation: 0.2,
@@ -107,7 +129,27 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Colors'),
+                            content: Text('Choose a color'),
+                            actions: [
+                              MaterialButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(context);
+                                },
+                                child: Text(
+                                  'Close',
+                                  style: TextStyle(color: Colors.blue),
+                                ),
+                              ),
+                            ],
+                          );
+                        });
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   elevation: 0.2,
@@ -126,7 +168,27 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Quantity'),
+                            content: Text('Choose the quantity'),
+                            actions: [
+                              MaterialButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(context);
+                                },
+                                child: Text(
+                                  'Close',
+                                  style: TextStyle(color: Colors.blue),
+                                ),
+                              ),
+                            ],
+                          );
+                        });
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   elevation: 0.2,
@@ -145,7 +207,6 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
             ],
           ),
-
           Row(
             children: [
               Expanded(
@@ -157,25 +218,70 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: Text('Buy Now'),
                 ),
               ),
-
               IconButton(
-                onPressed: () {
-
-                },
-                icon: Icon(Icons.add_shopping_cart, color: Colors.red,),
+                onPressed: () {},
+                icon: Icon(
+                  Icons.add_shopping_cart,
+                  color: Colors.red,
+                ),
               ),
-
               IconButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 icon: Icon(Icons.favorite_border),
                 color: Colors.red,
               ),
             ],
+          ),
+          Divider(height: 20,),
+          ListTile(
+            title: Text('Product details\n'),
+            subtitle: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+          ),
+          Divider(),
+          Row(
+            children: [
+              Padding(padding: EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+              child: Text('Product name', style: TextStyle(color: Colors.grey),),),
+
+              Padding(padding: EdgeInsets.all(5.0),
+              child: Text(widget.productDetailsName),),
+            ],
+          ),
+
+          Row(
+            children: [
+              Padding(padding: EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+                child: Text('Product brand', style: TextStyle(color: Colors.grey),),),
+
+              // TODO: SHOULD ADD THE PRODUCT BRAND
+              Padding(padding: EdgeInsets.all(5.0),
+                child: Text('Brand X'),),
+            ],
+          ),
+
+          Row(
+            children: [
+              Padding(padding: EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+                child: Text('Product condition', style: TextStyle(color: Colors.grey),),),
+
+              // TODO: SHOULD ADD PRODUCT CONDITION
+              Padding(padding: EdgeInsets.all(5.0),
+                child: Text('New'),),
+            ],
+          ),
+
+          Divider(),
+          Padding(padding: EdgeInsets.all(8.0),
+            child: Text('Similar Products'),),
+
+          // TODO: SIMILAR PRODUCTS SHOULD BE UPDATED
+          Container(
+            height: 340,
+            child: SimilarProducts(),
           ),
         ],
       ),
     );
   }
 }
+

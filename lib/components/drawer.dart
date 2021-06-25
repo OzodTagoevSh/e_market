@@ -51,8 +51,8 @@ class DrawerView extends StatelessWidget {
 
           },
           child: ListTile(
-            title: Text('Categories'),
-            leading: Icon(Icons.dashboard, color: Colors.red,),
+            title: Text('Shopping Cart'),
+            leading: Icon(Icons.shopping_cart, color: Colors.red,),
           ),
         ),
         InkWell(
