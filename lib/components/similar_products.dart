@@ -1,6 +1,8 @@
 import 'package:e_market/pages/product_details.dart';
 import 'package:flutter/material.dart';
 
+// TODO: SIMILAR PRODUCTS SHOULD BE UPDATED
+
 class SimilarProducts extends StatefulWidget {
   const SimilarProducts({Key? key}) : super(key: key);
 

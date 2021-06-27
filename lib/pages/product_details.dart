@@ -274,7 +274,6 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(padding: EdgeInsets.all(8.0),
             child: Text('Similar Products'),),
 
-          // TODO: SIMILAR PRODUCTS SHOULD BE UPDATED
           Container(
             height: 340,
             child: SimilarProducts(),

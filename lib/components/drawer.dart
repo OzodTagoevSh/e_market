@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:e_market/pages/cart.dart';
 
 class DrawerView extends StatelessWidget {
   @override
@@ -48,7 +49,7 @@ class DrawerView extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Cart()));
           },
           child: ListTile(
             title: Text('Shopping Cart'),

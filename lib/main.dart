@@ -3,6 +3,7 @@ import 'package:e_market/components/horizontal_listview.dart';
 import 'components/carousel.dart';
 import 'components/drawer.dart';
 import 'components/products.dart';
+import 'pages/cart.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           ),
           IconButton(
               onPressed: () {
-
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Cart()));
               },
               icon: Icon(Icons.shopping_cart),
           ),
