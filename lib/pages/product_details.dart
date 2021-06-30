@@ -1,8 +1,8 @@
-import 'package:e_market/main.dart';
 import 'package:flutter/material.dart';
 import 'package:e_market/components/similar_products.dart';
+import 'package:e_market/pages/home.dart';
 
-/************************* PRODUCT DETAILS CLASS **************************/
+///************************* PRODUCT DETAILS CLASS **************************/
 
 class ProductDetails extends StatefulWidget {
   final productDetailsName;

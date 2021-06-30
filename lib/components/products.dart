@@ -2,7 +2,7 @@ import 'package:e_market/pages/product_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/************************ PRODUCTS CLASS ***************************/
+/// ********************** PRODUCTS CLASS ***************************/
 
 class Products extends StatefulWidget {
   const Products({Key? key}) : super(key: key);

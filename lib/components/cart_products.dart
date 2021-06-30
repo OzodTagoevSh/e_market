@@ -69,7 +69,7 @@ class SingleCartProduct extends StatelessWidget {
     return Card(
       child: ListTile(
         // =========== SECTION FOR LEADING ==========
-        leading: Image.asset(cartProductPicture, fit: BoxFit.cover),
+        leading: Image.asset(cartProductPicture, fit: BoxFit.fitHeight),
 
         // =========== SECTION FOR TITLE ============
         title: Text(cartProductName),
@@ -93,42 +93,43 @@ class SingleCartProduct extends StatelessWidget {
 
                 // =========== SECTION FOR COLOR ==================
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(30.0, 8.0, 8.0, 8.0),
+                  padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
                   child: Text('Color: '),
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.all(0.0),
                   child: Text(cartProductColor, style: TextStyle(color: Colors.red),),
                 ),
               ],
             ),
             // =========== SECTION // =========== SECTION FOR PRICE ==================FOR PRICE ==================
-            Expanded(
-              flex: 3,
-              child: Container(
-                alignment: Alignment.topLeft,
-                child: Text('\$$cartProductPrice',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17.0,
-                  ),
+            Container(
+              alignment: Alignment.topLeft,
+              child: Text(
+                '\$$cartProductPrice',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17.0,
                 ),
               ),
             ),
           ],
         ),
-        /*trailing: Column(
-          children: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_up, size: 2.0,),),
-            Text('$cartProductQuantity'),
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down, size: 2.0,),),
-          ],
+        trailing: FittedBox(
+          fit: BoxFit.cover,
+          child: Column(
+            children: [
+              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_up), iconSize: 150,),
+              Text('$cartProductQuantity', style: TextStyle(fontSize: 120.0, fontWeight: FontWeight.bold),),
+              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down), iconSize: 150,),
+            ],
+          ),
         ),
-
-         */
+        isThreeLine: true,
       ),
+      margin: EdgeInsets.fromLTRB(1.0, 10.0, 1.0, 0.0),
     );
   }
 }
