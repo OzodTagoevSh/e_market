@@ -8,6 +8,9 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      primaryColor: Colors.red.shade900,
+    ),
     home: Login(),
   ));
 }

@@ -1,4 +1,5 @@
 import 'package:e_market/pages/home.dart';
+import 'package:e_market/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,8 +37,8 @@ class _LoginState extends State<Login> {
       loading = true;
     });
 
-    preferences = await SharedPreferences.getInstance();
-    isLoggedIn = false; //await googleSignIn.isSignedIn();
+//    preferences = await SharedPreferences.getInstance();
+//    isLoggedIn = await googleSignIn.isSignedIn();
 
     if (isLoggedIn) {
       Navigator.pushReplacement(
@@ -49,55 +50,56 @@ class _LoginState extends State<Login> {
     });
   }
 
-  Future handleSignIn() async {
-    preferences = await SharedPreferences.getInstance();
-
-    setState(() {
-      loading = true;
-    });
-
-    FirebaseAuth auth = FirebaseAuth.instance;
-    GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleUser!.authentication;
-    AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken);
-    UserCredential authResult = await auth.signInWithCredential(credential);
-    User? user = authResult.user;
-    if (user != null) {
-      final QuerySnapshot result = await FirebaseFirestore.instance
-          .collection('users')
-          .where('id', isEqualTo: user.uid)
-          .get();
-      final List<DocumentSnapshot> documents = result.docs;
-
-      if (documents.length == 0) {
-        // Inserting the user to the collection
-        FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'id': user.uid,
-          'username': user.displayName,
-          'profilePicture': user.photoURL,
-        });
-
-        await preferences!.setString('id', user.uid);
-        await preferences!.setString('username', user.displayName.toString());
-        await preferences!.setString('profilePicture', user.photoURL.toString());
-      } else {
-          await preferences!.setString('id', documents[0]['id']);
-          await preferences!.setString('username', documents[0]['username']);
-          await preferences!.setString('profilePicture', documents[0]['profilePicture']);
-      }
-
-      Fluttertoast.showToast(msg: 'Login was successful');
-      setState(() {
-        loading = false;
-      });
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-    } else {
-      Fluttertoast.showToast(msg: 'Login failed');
-    }
-  }
+  // Future handleSignIn() async {
+  //   setState(() {
+  //     loading = true;
+  //   });
+  //   ///****************************** GOOGLE SIGN IN *****************************/
+  // /*
+  //   FirebaseAuth auth = FirebaseAuth.instance;
+  //   GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+  //   GoogleSignInAuthentication googleSignInAuthentication =
+  //       await googleUser!.authentication;
+  //   AuthCredential credential = GoogleAuthProvider.credential(
+  //       idToken: googleSignInAuthentication.idToken,
+  //       accessToken: googleSignInAuthentication.accessToken);
+  //   UserCredential authResult = await auth.signInWithCredential(credential);
+  //   User? user = authResult.user;
+  //   if (user != null) {
+  //     final QuerySnapshot result = await FirebaseFirestore.instance
+  //         .collection('users')
+  //         .where('id', isEqualTo: user.uid)
+  //         .get();
+  //     final List<DocumentSnapshot> documents = result.docs;
+  //
+  //     if (documents.length == 0) {
+  //       // Inserting the user to the collection
+  //       FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+  //         'id': user.uid,
+  //         'username': user.displayName,
+  //         'profilePicture': user.photoURL,
+  //       });
+  //
+  //       await preferences!.setString('id', user.uid);
+  //       await preferences!.setString('username', user.displayName.toString());
+  //       await preferences!.setString('profilePicture', user.photoURL.toString());
+  //     } else {
+  //         await preferences!.setString('id', documents[0]['id']);
+  //         await preferences!.setString('username', documents[0]['username']);
+  //         await preferences!.setString('profilePicture', documents[0]['profilePicture']);
+  //     }
+  //
+  //     Fluttertoast.showToast(msg: 'Login was successful');
+  //     setState(() {
+  //       loading = false;
+  //     });
+  //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+  //   } else {
+  //     Fluttertoast.showToast(msg: 'Login failed');
+  //   }
+  //
+  //  */
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -140,16 +142,17 @@ class _LoginState extends State<Login> {
                   child: ListView(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                         child: Material(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withOpacity(0.6),
                           elevation: 0.0,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 12.0, right: 20.0, bottom: 8.0),
+                            padding: const EdgeInsets.only(left: 12.0, right: 20.0),
                             child: TextFormField(
                               controller: _emailTextController,
                               decoration: InputDecoration(
+                                border: InputBorder.none,
                                 hintText: 'Email',
                                 icon: Icon(Icons.alternate_email_outlined),
                               ),
@@ -170,16 +173,17 @@ class _LoginState extends State<Login> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                         child: Material(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withOpacity(0.6),
                           elevation: 0.0,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 12.0, right: 20.0, bottom: 8.0),
+                            padding: const EdgeInsets.only(left: 12.0, right: 20.0),
                             child: TextFormField(
                               controller: _passwordTextController,
                               decoration: InputDecoration(
+                                border: InputBorder.none,
                                 hintText: 'Password',
                                 icon: Icon(Icons.lock_outlined),
                               ),
@@ -197,10 +201,10 @@ class _LoginState extends State<Login> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                         child: Material(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.blue,
+                          color: Colors.red.shade700,
                           elevation: 0.0,
                           child: MaterialButton(
                             onPressed: () {
@@ -231,19 +235,40 @@ class _LoginState extends State<Login> {
 
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: RichText(text: TextSpan(
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16.0),
-                          children: [
-                            TextSpan(
-                              text: 'Don\'t have an account? click here to',
-                            ),
-                            TextSpan(
-                              text: ' sign up!',
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ],
-                        ),),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+                          },
+                          child: Text('Sign up!', textAlign: TextAlign.center, style: TextStyle(color: Colors.red, fontSize: 20.0),),
+                        ),
                       ),
+
+                     ///************************ GOOGLE SIGN IN ******************************/
+                     /*
+                     Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.red,
+                          elevation: 0.0,
+                          child: MaterialButton(
+                            onPressed: () {
+                              handleSignIn();
+                            },
+                            minWidth: MediaQuery.of(context).size.width,
+                            child: Text(
+                              'Google',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      */
                     ],
                   ),
                 ),
